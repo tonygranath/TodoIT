@@ -10,53 +10,60 @@ public class TodoItemTest {
 	private final String PERSON_FIRSTNAME = "Greger";
 	private final String PERSON_LASTNAME = "Johansson";
 	private final String PERSON_EMAIL = "test@test.se";
-	private Person p;
+	private Person testPerson;
 	private final int ID = 1;
 	private final String TITLE = "Title Test";
 	private final String DESCRIPTION = "Description Test";
 	private final LocalDate DEADLINE = LocalDate.parse("2020-10-30");
 	private final boolean DONE = true;
-	private TodoItem item;
+	private TodoItem testItem;
 
 	@Before
 	public void setUp() {
-		p = new Person(PERSON_ID, PERSON_FIRSTNAME, PERSON_LASTNAME, PERSON_EMAIL);
-		item = new TodoItem(ID, TITLE, DESCRIPTION, DEADLINE, DONE, p);
+		testPerson = new Person(PERSON_ID, PERSON_FIRSTNAME, PERSON_LASTNAME, PERSON_EMAIL);
+		testItem = new TodoItem(ID, TITLE, DESCRIPTION, DEADLINE, DONE, testPerson);
 	}
 
 	@Test
-	public void test_person_successfully_instantiated() {
-		assertEquals(PERSON_ID, p.getId());
-		assertEquals(PERSON_FIRSTNAME, p.getFirstName());
-		assertEquals(PERSON_LASTNAME, p.getLastName());
-		assertEquals(PERSON_EMAIL, p.getEmail());
+	public void testPerson_successfully_instantiated() {
+		assertEquals(PERSON_ID, testPerson.getId());
+		assertEquals(PERSON_FIRSTNAME, testPerson.getFirstName());
+		assertEquals(PERSON_LASTNAME, testPerson.getLastName());
+		assertEquals(PERSON_EMAIL, testPerson.getEmail());
 	}
 
 	@Test
 	public void testItem_successfully_instantiated() {
-		assertEquals(ID, item.getId());
-		assertEquals(TITLE, item.getTitle());
-		assertEquals(DESCRIPTION, item.getTaskDescription());
-		assertEquals(DEADLINE, item.getDeadLine());
-		assertEquals(DONE, item.isDone());
-		assertEquals(p, item.getCreator());
+		assertEquals(ID, testItem.getId());
+		assertEquals(TITLE, testItem.getTitle());
+		assertEquals(DESCRIPTION, testItem.getTaskDescription());
+		assertEquals(DEADLINE, testItem.getDeadLine());
+		assertEquals(DONE, testItem.isDone());
+		assertEquals(testPerson, testItem.getCreator());
 	}
 
-	@Test
-	public void setTitle() {
+	@Test(expected = RuntimeException.class)
+	public void given_null_parameter_setTitle_throws_runtime_exception() {
+		testItem.setTitle(null);
+	}
+
+	@Test(expected = RuntimeException.class)
+	public void given_empty_string_parameter_setTitle_throws_runtime_exception() {
+		testItem.setTitle("");
 	}
 
 	@Test
 	public void setTaskDescription() {
 	}
 
-	@Test
-	public void setDeadLine() {
+	@Test(expected = RuntimeException.class)
+	public void given_null_parameter_setDeadLine_throws_runtime_exception() {
+		testItem.setDeadLine(null);
 	}
 
 	@Test
 	public void isDone() {
-		assertTrue(item.isDone());
+		assertTrue(testItem.isDone());
 	}
 
 	@Test
@@ -73,5 +80,15 @@ public class TodoItemTest {
 
 	@Test
 	public void getSummary() {
+		assertEquals("{ id: " + testItem.getId() + ",\n" +
+				"title: " + testItem.getTitle() +",\n" +
+				"taskDescription: " + testItem.getTaskDescription() + ",\n" +
+				"deadLine: " + testItem.getDeadLine().toString() + ",\n" +
+				"done: " + testItem.isDone() + ",\n" +
+				"creator: { id: " + testPerson.getId() + ",\n" +
+				"firstName: " + testPerson.getFirstName() + ",\n" +
+				"lastName: " + testPerson.getLastName() + ",\n" +
+				"email: " + testPerson.getEmail() + " } }",
+				testItem.getSummary());
 	}
 }
