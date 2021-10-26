@@ -34,7 +34,7 @@ public class TodoItem {
 
 	public void setTitle(String title) {
 		if (title.equals(""))
-			throw new RuntimeException("title was empty");
+			throw new RuntimeException("title was empty.");
 		else
 			this.title = title;
 	}
@@ -55,7 +55,7 @@ public class TodoItem {
 		if (deadLine != null)
 			this.deadLine = deadLine;
 		else
-			throw new RuntimeException("deadLine was null");
+			throw new RuntimeException("deadLine was null.");
 	}
 
 	public boolean isDone() {
@@ -86,5 +86,4 @@ public class TodoItem {
 				+ ",\ndone: " + done
 				+ ",\ncreator: " + creator.getSummary() + " }";
 	}
-
 }
