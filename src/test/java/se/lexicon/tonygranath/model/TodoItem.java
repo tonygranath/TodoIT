@@ -86,5 +86,4 @@ public class TodoItem {
 				+ ",\ndone: " + done
 				+ ",\ncreator: " + creator.getSummary() + " }";
 	}
-
 }
