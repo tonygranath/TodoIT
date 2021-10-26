@@ -26,26 +26,6 @@ public class PersonTest {
 	}
 
 	@Test
-	public void testGetId() {
-		assertEquals(1, p.getId());
-	}
-
-	@Test
-	public void testGetFirstName() {
-		assertEquals("Sverker", p.getFirstName());
-	}
-
-	@Test
-	public void testGetLastName() {
-		assertEquals("Johansson", p.getLastName());
-	}
-
-	@Test
-	public void testGetEmail() {
-		assertEquals("test@test.se", p.getEmail());
-	}
-
-	@Test
 	public void testGetSummary() {
 		assertEquals("{ id: " + ID + ",\n" +
 						"firstName: " + FIRSTNAME + ",\n" +

@@ -18,21 +18,31 @@ public class TodoItemTest {
 	private final String DESCRIPTION = "Description Test";
 	private final LocalDate DEADLINE = LocalDate.parse("2020-10-30");
 	private final boolean DONE = true;
-	private final Person CREATOR = p;
+	//private final Person CREATOR = p;
 	private TodoItem item;
 
 	@Before
 	public void setUp() {
 		p = new Person(PERSON_ID, PERSON_FIRSTNAME, PERSON_LASTNAME, PERSON_EMAIL);
-		item = new TodoItem(ID, TITLE, DESCRIPTION, DEADLINE, DONE, CREATOR);
+		item = new TodoItem(ID, TITLE, DESCRIPTION, DEADLINE, DONE, p);
 	}
 
 	@Test
-	public void getId() {
+	public void test_person_successfully_instantiated() {
+		assertEquals(PERSON_ID, p.getId());
+		assertEquals(PERSON_FIRSTNAME, p.getFirstName());
+		assertEquals(PERSON_LASTNAME, p.getLastName());
+		assertEquals(PERSON_EMAIL, p.getEmail());
 	}
 
 	@Test
-	public void getTitle() {
+	public void testItem_successfully_instantiated() {
+		assertEquals(ID, item.getId());
+		assertEquals(TITLE, item.getTitle());
+		assertEquals(DESCRIPTION, item.getTaskDescription());
+		assertEquals(DEADLINE, item.getDeadLine());
+		assertEquals(DONE, item.isDone());
+		assertEquals(p, item.getCreator());
 	}
 
 	@Test
@@ -40,15 +50,7 @@ public class TodoItemTest {
 	}
 
 	@Test
-	public void getTaskDescription() {
-	}
-
-	@Test
 	public void setTaskDescription() {
-	}
-
-	@Test
-	public void getDeadLine() {
 	}
 
 	@Test
@@ -57,14 +59,11 @@ public class TodoItemTest {
 
 	@Test
 	public void isDone() {
+		assertTrue(item.isDone());
 	}
 
 	@Test
 	public void setDone() {
-	}
-
-	@Test
-	public void getCreator() {
 	}
 
 	@Test
