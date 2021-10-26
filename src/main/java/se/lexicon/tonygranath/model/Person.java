@@ -51,6 +51,9 @@ public class Person {
 	}
 
 	public String getSummary() {
-		return "";
+		return "{ id: " + id
+				+ ",\nfirstName: " + firstName
+				+ ",\nlastName: " + lastName
+				+ ",\nemail: " + email + " }";
 	}
 }
