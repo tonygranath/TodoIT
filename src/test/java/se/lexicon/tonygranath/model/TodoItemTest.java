@@ -18,7 +18,6 @@ public class TodoItemTest {
 	private final String DESCRIPTION = "Description Test";
 	private final LocalDate DEADLINE = LocalDate.parse("2020-10-30");
 	private final boolean DONE = true;
-	//private final Person CREATOR = p;
 	private TodoItem item;
 
 	@Before
