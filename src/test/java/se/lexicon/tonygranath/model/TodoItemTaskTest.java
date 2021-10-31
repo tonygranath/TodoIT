@@ -44,37 +44,57 @@ public class TodoItemTaskTest {
 	public void testTask_successfully_instantiated() {
 		assertEquals(TODOTASK_ID, testTask.getId());
 		assertTrue(testTask.isAssigned());
-	}
-
-	@Test
-	public void getId() {
+		assertEquals(testPerson, testTask.getAssignee());
+		assertEquals(testItem, testTask.getTodoItem());
 	}
 
 	@Test
 	public void isAssigned() {
+		assertTrue(testTask.isAssigned());
 	}
 
 	@Test
 	public void setAssigned() {
+		assertTrue(testTask.isAssigned());
+		testTask.setAssigned(false);
+		assertFalse(testTask.isAssigned());
 	}
 
 	@Test
 	public void getTodoItem() {
+		assertEquals(testTask.getTodoItem(), testItem);
 	}
 
 	@Test
 	public void setTodoItem() {
-	}
-
-	@Test
-	public void getAssignee() {
+		final TodoItem item = new TodoItem(2, "TITLE", "DESCRIPTION", LocalDate.parse("1900-01-01"), false, testPerson);
+		testTask.setTodoItem(item);
+		assertEquals(item, testTask.getTodoItem());
 	}
 
 	@Test
 	public void setAssignee() {
+		final Person p = new Person(2, "Frans", "Fransson", "frans@frasse.se");
+		testTask.setAssignee(p);
+		assertEquals(p, testTask.getAssignee());
 	}
 
 	@Test
 	public void getSummary() {
+		assertEquals(testTask.getSummary(), "{ id: " + TODOTASK_ID + ",\n" +
+				"assigned: " + TODOTASK_ASSIGNED + ",\n" +
+				"todoItem: { id: " + TODOITEM_ID + ",\n" +
+				"title: " + TODOITEM_TITLE + ",\n" +
+				"taskDescription: " + TODOITEM_DESCRIPTION + ",\n" +
+				"deadLine: " + TODOITEM_DEADLINE + ",\n" +
+				"done: " + TODOITEM_DONE + ",\n" +
+				"creator: { id: " + PERSON_ID + ",\n" +
+				"firstName: " + PERSON_FIRSTNAME + ",\n" +
+				"lastName: " + PERSON_LASTNAME + ",\n" +
+				"email: " + PERSON_EMAIL + " } },\n" +
+				"assignee: { id: " + PERSON_ID + ",\n" +
+				"firstName: " + PERSON_FIRSTNAME + ",\n" +
+				"lastName: " + PERSON_LASTNAME + ",\n" +
+				"email: " + PERSON_EMAIL + " } }");
 	}
 }

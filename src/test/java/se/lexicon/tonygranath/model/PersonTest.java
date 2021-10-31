@@ -2,6 +2,7 @@ package se.lexicon.tonygranath.model;
 
 import org.junit.Before;
 import org.junit.Test;
+
 import static org.junit.Assert.*;
 
 public class PersonTest {
@@ -32,6 +33,7 @@ public class PersonTest {
 						"email: " + EMAIL + " }",
 				p.getSummary());
 	}
+
 	@Test(expected = RuntimeException.class)
 	public void given_null_firstName_constructor_throws_runtime_exception() {
 		p = new Person(ID, null, LASTNAME, EMAIL);
@@ -46,4 +48,26 @@ public class PersonTest {
 	public void given_null_email_constructor_throws_runtime_exception() {
 		p = new Person(ID, FIRSTNAME, LASTNAME, null);
 	}
+
+	@Test
+	public void setFirstName() {
+		final String newName = "Lasse";
+		p.setFirstName(newName);
+		assertEquals(newName, p.getFirstName());
+	}
+
+	@Test
+	public void setLastName() {
+		final String newName = "Andersson";
+		p.setLastName(newName);
+		assertEquals(newName, p.getLastName());
+	}
+
+	@Test
+	public void setEmail() {
+		final String newEmail = "a@b.cd";
+		p.setEmail(newEmail);
+		assertEquals(newEmail, p.getEmail());
+	}
 }
+

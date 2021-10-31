@@ -3,6 +3,7 @@ package se.lexicon.tonygranath.model;
 import org.junit.Before;
 import org.junit.Test;
 import java.time.LocalDate;
+
 import static org.junit.Assert.*;
 
 public class TodoItemTest {
@@ -14,7 +15,7 @@ public class TodoItemTest {
 	private final int ID = 1;
 	private final String TITLE = "Title Test";
 	private final String DESCRIPTION = "Description Test";
-	private final LocalDate DEADLINE = LocalDate.parse("2020-10-30");
+	private final LocalDate DEADLINE = LocalDate.parse("2022-10-30");
 	private final boolean DONE = true;
 	private TodoItem testItem;
 
@@ -54,6 +55,10 @@ public class TodoItemTest {
 
 	@Test
 	public void setTaskDescription() {
+		assertEquals(DESCRIPTION, testItem.getTaskDescription());
+		final String newDescription = "New task description";
+		testItem.setTaskDescription(newDescription);
+		assertEquals(newDescription, testItem.getTaskDescription());
 	}
 
 	@Test(expected = RuntimeException.class)
@@ -68,27 +73,54 @@ public class TodoItemTest {
 
 	@Test
 	public void setDone() {
+		assertTrue(testItem.isDone());
+		testItem.setDone(false);
+		assertFalse(testItem.isDone());
 	}
 
 	@Test
 	public void setCreator() {
+		assertEquals(testPerson, testItem.getCreator());
+		Person p = new Person(2, "Sven", "Hansson", "sven@hansson.se");
+		testItem.setCreator(p);
+		assertEquals(p, testItem.getCreator());
 	}
 
 	@Test
 	public void isOverDue() {
+		assertFalse(testItem.isOverDue());
+		final LocalDate newDeadline = LocalDate.parse("1901-02-02");
+		testItem.setDeadLine(newDeadline);
+		assertTrue(testItem.isOverDue());
 	}
 
 	@Test
 	public void getSummary() {
-		assertEquals("{ id: " + testItem.getId() + ",\n" +
-				"title: " + testItem.getTitle() +",\n" +
-				"taskDescription: " + testItem.getTaskDescription() + ",\n" +
-				"deadLine: " + testItem.getDeadLine().toString() + ",\n" +
-				"done: " + testItem.isDone() + ",\n" +
-				"creator: { id: " + testPerson.getId() + ",\n" +
-				"firstName: " + testPerson.getFirstName() + ",\n" +
-				"lastName: " + testPerson.getLastName() + ",\n" +
-				"email: " + testPerson.getEmail() + " } }",
+		assertEquals("{ id: " + ID + ",\n" +
+				"title: " + TITLE +",\n" +
+				"taskDescription: " + DESCRIPTION + ",\n" +
+				"deadLine: " + DEADLINE + ",\n" +
+				"done: " + DONE + ",\n" +
+				"creator: { id: " + PERSON_ID + ",\n" +
+				"firstName: " + PERSON_FIRSTNAME + ",\n" +
+				"lastName: " + PERSON_LASTNAME + ",\n" +
+				"email: " + PERSON_EMAIL + " } }",
 				testItem.getSummary());
+	}
+
+	@Test
+	public void setDeadline() {
+		assertEquals(DEADLINE, testItem.getDeadLine());
+		final LocalDate newDeadline = LocalDate.parse("1901-02-02");
+		testItem.setDeadLine(newDeadline);
+		assertEquals(newDeadline, testItem.getDeadLine());
+	}
+
+	@Test
+	public void setTitle() {
+		assertEquals(TITLE, testItem.getTitle());
+		final String newTitle = "Changed title";
+		testItem.setTitle(newTitle);
+		assertEquals(newTitle, testItem.getTitle());
 	}
 }
