@@ -33,6 +33,7 @@ public class TodoItemTest {
 		assertEquals(PERSON_EMAIL, testPerson.getEmail());
 	}
 
+	//also tests all the getters
 	@Test
 	public void testItem_successfully_instantiated() {
 		assertEquals(ID, testItem.getId());
@@ -95,20 +96,6 @@ public class TodoItemTest {
 	}
 
 	@Test
-	public void getSummary() {
-		assertEquals("{ id: " + ID + ",\n" +
-				"title: " + TITLE +",\n" +
-				"taskDescription: " + DESCRIPTION + ",\n" +
-				"deadLine: " + DEADLINE + ",\n" +
-				"done: " + DONE + ",\n" +
-				"creator: { id: " + PERSON_ID + ",\n" +
-				"firstName: " + PERSON_FIRSTNAME + ",\n" +
-				"lastName: " + PERSON_LASTNAME + ",\n" +
-				"email: " + PERSON_EMAIL + " } }",
-				testItem.getSummary());
-	}
-
-	@Test
 	public void setDeadline() {
 		assertEquals(DEADLINE, testItem.getDeadLine());
 		final LocalDate newDeadline = LocalDate.parse("1901-02-02");
@@ -122,5 +109,30 @@ public class TodoItemTest {
 		final String newTitle = "Changed title";
 		testItem.setTitle(newTitle);
 		assertEquals(newTitle, testItem.getTitle());
+	}
+
+	@Test
+	public void testEquals() {
+		TodoItem test = new TodoItem(ID, TITLE, DESCRIPTION, DEADLINE, DONE, testPerson);
+		assertTrue(testItem.equals(test));
+		test = new TodoItem(1100200, TITLE, DESCRIPTION, DEADLINE, DONE, testPerson);
+		assertFalse(testItem.equals(test));
+	}
+
+	@Test
+	public void testHashCode() {
+		//I don't know how to test this so I just print it out
+		System.out.println(testItem.hashCode());
+	}
+
+	@Test
+	public void testToString() {
+		assertEquals(testItem.toString(),
+				"TodoItem{id=" + ID +
+						", title='" + TITLE +
+						"', taskDescription='" + DESCRIPTION +
+						"', deadLine=" + DEADLINE +
+						", done=" + DONE +
+					"}");
 	}
 }

@@ -48,6 +48,11 @@ public class TodoItemTaskTest {
 		assertEquals(testItem, testTask.getTodoItem());
 	}
 
+	@Test(expected = RuntimeException.class)
+	public void given_null_TodoItem_constructor_throws_runtime_exception() {
+		testTask = new TodoItemTask(TODOTASK_ID, null);
+	}
+
 	@Test
 	public void isAssigned() {
 		assertTrue(testTask.isAssigned());
@@ -65,6 +70,11 @@ public class TodoItemTaskTest {
 		assertEquals(testTask.getTodoItem(), testItem);
 	}
 
+	@Test(expected = RuntimeException.class)
+	public void given_null_parameter_setTodoItem_throws_runtime_exception() {
+		testTask.setTodoItem(null);
+	}
+
 	@Test
 	public void setTodoItem() {
 		final TodoItem item = new TodoItem(2, "TITLE", "DESCRIPTION", LocalDate.parse("1900-01-01"), false, testPerson);
@@ -80,21 +90,27 @@ public class TodoItemTaskTest {
 	}
 
 	@Test
-	public void getSummary() {
-		assertEquals(testTask.getSummary(), "{ id: " + TODOTASK_ID + ",\n" +
-				"assigned: " + TODOTASK_ASSIGNED + ",\n" +
-				"todoItem: { id: " + TODOITEM_ID + ",\n" +
-				"title: " + TODOITEM_TITLE + ",\n" +
-				"taskDescription: " + TODOITEM_DESCRIPTION + ",\n" +
-				"deadLine: " + TODOITEM_DEADLINE + ",\n" +
-				"done: " + TODOITEM_DONE + ",\n" +
-				"creator: { id: " + PERSON_ID + ",\n" +
-				"firstName: " + PERSON_FIRSTNAME + ",\n" +
-				"lastName: " + PERSON_LASTNAME + ",\n" +
-				"email: " + PERSON_EMAIL + " } },\n" +
-				"assignee: { id: " + PERSON_ID + ",\n" +
-				"firstName: " + PERSON_FIRSTNAME + ",\n" +
-				"lastName: " + PERSON_LASTNAME + ",\n" +
-				"email: " + PERSON_EMAIL + " } }");
+	public void testEquals() {
+		TodoItemTask test = new TodoItemTask(TODOTASK_ID, testItem, testPerson);
+		assertTrue(testTask.equals(test));
+	}
+
+	@Test
+	public void testHashCode() {
+		//I don't know how to test this so I just print it out
+		System.out.println(testTask.hashCode());
+	}
+
+	@Test
+	public void testToString() {
+		assertEquals(testTask.toString(),
+				"TodoItemTask{id=" + TODOTASK_ID +
+				", assigned=" + TODOTASK_ASSIGNED +
+				", todoItem=TodoItem{id=" + TODOITEM_ID +
+					", title='" + TODOITEM_TITLE +
+					"', taskDescription='" + TODOITEM_DESCRIPTION +
+					"', deadLine=" + TODOITEM_DEADLINE +
+					", done=" + TODOITEM_DONE +
+				"}}");
 	}
 }

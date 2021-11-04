@@ -1,16 +1,24 @@
 package se.lexicon.tonygranath.model;
 
+import java.util.Objects;
+
 public class Person {
 	private final int id;
 	private String firstName;
 	private String lastName;
 	private String email;
+	private AppUser credentials;
 
 	public Person(int id, String firstName, String lastName, String email) {
 		this.id = id;
 		setFirstName(firstName);
 		setLastName(lastName);
 		setEmail(email);
+	}
+
+	public Person(int id, String firstName, String lastName, String email, AppUser credentials) {
+		this(id, firstName, lastName, email);
+		setCredentials(credentials);
 	}
 
 	public int getId() {
@@ -50,10 +58,34 @@ public class Person {
 			throw new RuntimeException("email was null.");
 	}
 
-	public String getSummary() {
-		return "{ id: " + id
-				+ ",\nfirstName: " + firstName
-				+ ",\nlastName: " + lastName
-				+ ",\nemail: " + email + " }";
+	public AppUser getCredentials() {
+		return credentials;
+	}
+
+	public void setCredentials(AppUser credentials) {
+		this.credentials = credentials;
+	}
+
+	@Override
+	public String toString() {
+		return "Person{" +
+					"id=" + id +
+					", firstName='" + firstName + '\'' +
+					", lastName='" + lastName + '\'' +
+					", email='" + email + '\'' +
+				'}';
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		Person person = (Person) o;
+		return id == person.id && firstName.equals(person.firstName) && lastName.equals(person.lastName) && email.equals(person.email);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(id, firstName, lastName, email);
 	}
 }
