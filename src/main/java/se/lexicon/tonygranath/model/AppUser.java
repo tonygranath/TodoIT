@@ -8,11 +8,6 @@ public class AppUser {
     private AppRole role;
 
     public AppUser(String username, String password, AppRole role) {
-        //if ((username == null) || (password == null) || (role == null))
-        //    throw new RuntimeException("Can't create AppUser object with null username/password/role.");
-        //this.username = username;
-        //this.password = password;
-        //this.role = role;
         setUsername(username);
         setPassword(password);
         setRole(role);
