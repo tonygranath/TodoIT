@@ -3,7 +3,7 @@ package se.lexicon.tonygranath.model;
 import java.util.Objects;
 
 public class TodoItemTask {
-	private final int id;
+	private int id;
 	private boolean assigned;
 	private TodoItem todoItem;
 	private Person assignee;
@@ -25,6 +25,8 @@ public class TodoItemTask {
 		if (assignee != null)
 			assigned = true;
 	}
+
+	public TodoItemTask() {}
 
 	public int getId() {
 		return id;

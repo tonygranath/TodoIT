@@ -1,15 +1,14 @@
-package se.lexicon.tonygranath.data;
+package se.lexicon.tonygranath.io;
 
 import org.junit.Before;
 import org.junit.Test;
+import static org.junit.Assert.*;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import static org.junit.Assert.*;
-
-public class PropertiesDAOManagerTest {
-    private static PropertiesDAO PROPERTIES_DAO = PropertiesDAOManager.getInstance();
+public class PropertiesManagerTest {
+    private static final PropertiesManager PROPERTIES_DAO = PropertiesManager.getTestInstance();
     private static final String READ_CONFIG_FILE = "src/test/resources/test.config";
     private static final String SAVE_CONFIG_FILE = "src/test/resources/test_save.config";
 
@@ -97,6 +96,6 @@ public class PropertiesDAOManagerTest {
 
     @Test
     public void getInstance() {
-        assertEquals(PropertiesDAOManager.getInstance(), PROPERTIES_DAO);
+        assertEquals(PropertiesManager.getInstance(), PROPERTIES_DAO);
     }
 }

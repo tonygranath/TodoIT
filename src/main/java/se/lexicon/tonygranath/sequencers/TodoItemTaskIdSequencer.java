@@ -1,17 +1,19 @@
 package se.lexicon.tonygranath.sequencers;
 
 public class TodoItemTaskIdSequencer  {
-    private static final TodoItemTaskIdSequencer INSTANCE;
+    private static TodoItemTaskIdSequencer INSTANCE;
     private static int currentId;
-
-    static {
-        INSTANCE = new TodoItemTaskIdSequencer();
-    }
 
     private TodoItemTaskIdSequencer() {}
 
     public static TodoItemTaskIdSequencer getInstance() {
+        if (INSTANCE == null)
+            INSTANCE = new TodoItemTaskIdSequencer();
         return INSTANCE;
+    }
+
+    public static TodoItemTaskIdSequencer getTestInstance() {
+        return new TodoItemTaskIdSequencer();
     }
 
     public int nextId() {

@@ -1,17 +1,19 @@
 package se.lexicon.tonygranath.sequencers;
 
 public class PersonIdSequencer {
-    private static final PersonIdSequencer INSTANCE;
+    private static PersonIdSequencer INSTANCE;
     private static int currentId;
-
-    static {
-        INSTANCE = new PersonIdSequencer();
-    }
 
     private PersonIdSequencer() {}
 
     public static PersonIdSequencer getInstance() {
+        if (INSTANCE == null)
+            INSTANCE = new PersonIdSequencer();
         return INSTANCE;
+    }
+
+    public static PersonIdSequencer getTestInstance() {
+        return new PersonIdSequencer();
     }
 
     public int nextId() {

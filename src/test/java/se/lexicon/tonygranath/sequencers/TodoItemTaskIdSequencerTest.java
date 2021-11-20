@@ -6,16 +6,11 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class TodoItemTaskIdSequencerTest {
-    private static final TodoItemTaskIdSequencer SEQUENCER = TodoItemTaskIdSequencer.getInstance();
+    private static final TodoItemTaskIdSequencer SEQUENCER = TodoItemTaskIdSequencer.getTestInstance();
 
     @Before
     public void setUp() {
         SEQUENCER.setCurrentId(0);
-    }
-
-    @Test
-    public void getInstance() {
-        assertEquals(TodoItemTaskIdSequencer.getInstance(), SEQUENCER);
     }
 
     @Test

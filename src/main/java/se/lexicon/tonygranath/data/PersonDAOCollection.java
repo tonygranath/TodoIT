@@ -7,43 +7,50 @@ import java.util.HashSet;
 import java.util.Optional;
 
 public class PersonDAOCollection implements PersonDAO {
-    private static final PersonDAOCollection INSTANCE;
-    private final Collection<Person> persons = new HashSet<>();
+    private static PersonDAOCollection INSTANCE;
+    private Collection<Person> people = new HashSet<>();
 
-    static {
-        INSTANCE = new PersonDAOCollection();
-    }
-
-    public static PersonDAOCollection getInstance() {
-        return INSTANCE;
+    public PersonDAOCollection(Collection<Person> people) {
+        if (people != null)
+            this.people = people;
     }
 
     private PersonDAOCollection() {}
 
+    public static PersonDAOCollection getInstance() {
+        if (INSTANCE == null)
+            INSTANCE = new PersonDAOCollection();
+        return INSTANCE;
+    }
+
+    public static PersonDAOCollection getTestInstance() {
+        return new PersonDAOCollection();
+    }
+
     @Override
     public Optional<Person> persist(Person person) {
         //I would prefer returning a boolean here...
-        persons.add(person);
+        people.add(person);
         return Optional.ofNullable(person);
     }
 
     @Override
     public Collection<Person> findAll() {
-        return persons;
+        return people;
     }
 
     @Override
     public boolean remove(Integer id) {
-        return persons.removeIf(person -> person.getId() == id);
+        return people.removeIf(person -> person.getId() == id);
     }
 
     @Override
     public Optional<Person> findById(int id) {
-        return persons.stream().filter(person -> person.getId() == id).findFirst();
+        return people.stream().filter(person -> person.getId() == id).findFirst();
     }
 
     @Override
     public Optional<Person> findByEmail(String email) {
-        return persons.stream().filter(person -> person.getEmail().equalsIgnoreCase(email)).findFirst();
+        return people.stream().filter(person -> person.getEmail().equalsIgnoreCase(email)).findFirst();
     }
 }

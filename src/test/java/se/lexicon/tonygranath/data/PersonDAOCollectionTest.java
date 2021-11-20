@@ -2,6 +2,7 @@ package se.lexicon.tonygranath.data;
 
 import org.junit.Before;
 import org.junit.Test;
+
 import se.lexicon.tonygranath.model.AppRole;
 import se.lexicon.tonygranath.model.AppUser;
 import se.lexicon.tonygranath.model.Person;
@@ -14,8 +15,8 @@ import static org.junit.Assert.*;
 public class PersonDAOCollectionTest {
     private AppUser testCredentials;
     private Person testPerson1, testPerson2, testPerson3;
-    private static final PersonDAOCollection TEST_COLLECTION = PersonDAOCollection.getInstance();
-    private static final PersonIdSequencer SEQUENCER = PersonIdSequencer.getInstance();
+    private static final PersonDAOCollection TEST_COLLECTION = PersonDAOCollection.getTestInstance();
+    private static final PersonIdSequencer SEQUENCER = PersonIdSequencer.getTestInstance();
 
     @Before
     public void setUp() {
@@ -54,10 +55,5 @@ public class PersonDAOCollectionTest {
     @Test
     public void findByEmail() {
         assertEquals(TEST_COLLECTION.findByEmail(testPerson1.getEmail()).get(), testPerson1);
-    }
-
-    @Test
-    public void getInstance() {
-        assertEquals(PersonDAOCollection.getInstance(), TEST_COLLECTION);
     }
 }

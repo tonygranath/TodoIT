@@ -7,23 +7,31 @@ import java.util.HashSet;
 import java.util.Optional;
 
 public class TodoItemTaskDAOCollection implements TodoItemTaskDAO {
-    private static final TodoItemTaskDAOCollection INSTANCE;
-    private final Collection<TodoItemTask> tasks = new HashSet<>();
+    private static TodoItemTaskDAOCollection INSTANCE;
+    private Collection<TodoItemTask> tasks = new HashSet<>();
 
-    static {
-        INSTANCE = new TodoItemTaskDAOCollection();
+    public TodoItemTaskDAOCollection(Collection<TodoItemTask> tasks) {
+        if (tasks != null)
+            this.tasks = tasks;
     }
-
     private TodoItemTaskDAOCollection() {}
 
     public static TodoItemTaskDAOCollection getInstance() {
+        if (INSTANCE == null)
+            INSTANCE = new TodoItemTaskDAOCollection();
         return INSTANCE;
+    }
+
+    public static TodoItemTaskDAOCollection getTestInstance() {
+        return new TodoItemTaskDAOCollection();
     }
 
     @Override
     public Optional<TodoItemTask> persist(TodoItemTask todoItemTask) {
         //I would just name the parameter "task"
-        tasks.add(todoItemTask);
+
+        if ((todoItemTask != null) && !tasks.contains(todoItemTask))
+            tasks.add(todoItemTask);
         return Optional.ofNullable(todoItemTask);
     }
 

@@ -13,6 +13,8 @@ public class AppUser {
         setRole(role);
     }
 
+    private AppUser() {}
+
     public String getUsername() {
         return username;
     }

@@ -1,10 +1,12 @@
 package se.lexicon.tonygranath.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.time.LocalDate;
 import java.util.Objects;
 
 public class TodoItem {
-	private final int id;
+	private int id;
 	private String title;
 	private String taskDescription;
 	private LocalDate deadLine;
@@ -24,6 +26,8 @@ public class TodoItem {
 		setTitle(title);
 		setDeadLine(deadLine);
 	}
+
+	public TodoItem() {}
 
 	public int getId() {
 		return id;
@@ -75,6 +79,7 @@ public class TodoItem {
 		this.creator = creator;
 	}
 
+	@JsonIgnore
 	public boolean isOverDue() {
 		return LocalDate.now().isAfter(deadLine);
 	}

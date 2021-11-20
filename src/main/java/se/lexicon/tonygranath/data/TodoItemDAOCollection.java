@@ -8,23 +8,31 @@ import java.util.HashSet;
 import java.util.Optional;
 
 public class TodoItemDAOCollection implements TodoItemDAO {
-    private static final TodoItemDAOCollection INSTANCE;
-    private final Collection<TodoItem> items = new HashSet<>();
+    private static TodoItemDAOCollection INSTANCE;
+    private Collection<TodoItem> items = new HashSet<>();
 
-    static {
-        INSTANCE = new TodoItemDAOCollection();
+    public TodoItemDAOCollection(Collection<TodoItem> items) {
+        if (items != null)
+            this.items = items;
     }
 
     private TodoItemDAOCollection() {}
 
     public static TodoItemDAOCollection getInstance() {
+        if (INSTANCE == null)
+            INSTANCE = new TodoItemDAOCollection();
         return INSTANCE;
+    }
+
+    public static TodoItemDAOCollection getTestInstance() {
+        return new TodoItemDAOCollection();
     }
 
     @Override
     public Optional<TodoItem> persist(TodoItem item) {
-        items.add(item);
-        return Optional.of(item);
+        if ((item != null) && !items.contains(item))
+            items.add(item);
+        return Optional.ofNullable(item);
     }
 
     @Override

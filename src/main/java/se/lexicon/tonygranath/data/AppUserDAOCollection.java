@@ -7,22 +7,30 @@ import java.util.HashSet;
 import java.util.Optional;
 
 public class AppUserDAOCollection implements AppUserDAO {
-    private static final AppUserDAOCollection INSTANCE;
-    private final Collection<AppUser> appUsers = new HashSet<>();
+    private static AppUserDAOCollection INSTANCE;
+    private Collection<AppUser> appUsers = new HashSet<>();
 
-    static {
-        INSTANCE = new AppUserDAOCollection();
+    public AppUserDAOCollection(Collection<AppUser> users) {
+        if (users != null)
+            appUsers = users;
     }
 
     private AppUserDAOCollection() {}
 
     public static AppUserDAOCollection getInstance() {
+        if (INSTANCE == null)
+            INSTANCE = new AppUserDAOCollection();
         return INSTANCE;
+    }
+
+    public static AppUserDAOCollection getTestInstance() {
+        return new AppUserDAOCollection();
     }
 
     @Override
     public Optional<AppUser> persist(AppUser user) {
-        appUsers.add(user);
+        if (!appUsers.contains(user) && (user != null))
+            appUsers.add(user);
         return Optional.ofNullable(user);
     }
 

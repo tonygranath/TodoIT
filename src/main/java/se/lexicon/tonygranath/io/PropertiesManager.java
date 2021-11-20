@@ -1,4 +1,4 @@
-package se.lexicon.tonygranath.data;
+package se.lexicon.tonygranath.io;
 
 import java.io.*;
 import java.nio.file.Files;
@@ -8,26 +8,31 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
 
-public class PropertiesDAOManager implements PropertiesDAO {
-    private static final PropertiesDAOManager INSTANCE;
-    private final Map<String, String> propertyMap = new HashMap<>();
+public class PropertiesManager {
+    private static PropertiesManager INSTANCE;
+    private Map<String, String> propertyMap = new HashMap<>();
 
-    static {
-        INSTANCE = new PropertiesDAOManager();
+    public PropertiesManager(Map<String, String> properties) {
+        if (properties != null)
+            propertyMap = properties;
     }
 
-    private PropertiesDAOManager() {}
+    private PropertiesManager() {}
 
-    public static PropertiesDAOManager getInstance() {
+    public static PropertiesManager getInstance() {
+        if (INSTANCE == null)
+            INSTANCE = new PropertiesManager();
         return INSTANCE;
     }
 
-    @Override
+    public static PropertiesManager getTestInstance() {
+        return new PropertiesManager();
+    }
+
     public Map<String, String> getProperties() {
         return propertyMap;
     }
 
-    @Override
     public boolean save(String file) {
         Properties properties = new Properties();
 
@@ -47,13 +52,11 @@ public class PropertiesDAOManager implements PropertiesDAO {
         return false;
     }
 
-    @Override
     public void set(String property, String value) {
         if (propertyMap.putIfAbsent(property, value) != null)
             throw new RuntimeException("Property "+ property + " already set.");
     }
 
-    @Override
     public void set(Map<String, String> properties) {
         for(Map.Entry<String, String> entry : properties.entrySet()) {
             if (propertyMap.putIfAbsent(entry.getKey(), entry.getValue()) != null)
@@ -61,7 +64,6 @@ public class PropertiesDAOManager implements PropertiesDAO {
         }
     }
 
-    @Override
     public void read(String file) {
         Properties properties = new Properties();
 
@@ -77,12 +79,10 @@ public class PropertiesDAOManager implements PropertiesDAO {
         }
     }
 
-    @Override
     public void clear() {
         propertyMap.clear();
     }
 
-    @Override
     public void remove(String property) {
         propertyMap.remove(property);
     }

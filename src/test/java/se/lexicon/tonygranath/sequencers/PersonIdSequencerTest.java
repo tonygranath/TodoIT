@@ -6,16 +6,11 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class PersonIdSequencerTest {
-    private static final PersonIdSequencer SEQUENCER = PersonIdSequencer.getInstance();
+    private static final PersonIdSequencer SEQUENCER = PersonIdSequencer.getTestInstance();
 
     @Before
     public void setUp() {
         SEQUENCER.setCurrentId(0);
-    }
-
-    @Test
-    public void getInstance() {
-        assertEquals(PersonIdSequencer.getInstance(), SEQUENCER);
     }
 
     @Test

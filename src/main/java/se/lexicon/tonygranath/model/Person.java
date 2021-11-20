@@ -1,16 +1,17 @@
 package se.lexicon.tonygranath.model;
 
+import se.lexicon.tonygranath.sequencers.PersonIdSequencer;
+
 import java.util.Objects;
 
 public class Person {
-	private final int id;
+	private int id;
 	private String firstName;
 	private String lastName;
 	private String email;
 	private AppUser credentials;
 
 	public Person(int id, String firstName, String lastName, String email) {
-		this.id = id;
 		setFirstName(firstName);
 		setLastName(lastName);
 		setEmail(email);
@@ -19,6 +20,9 @@ public class Person {
 	public Person(int id, String firstName, String lastName, String email, AppUser credentials) {
 		this(id, firstName, lastName, email);
 		setCredentials(credentials);
+	}
+
+	public Person() {
 	}
 
 	public int getId() {

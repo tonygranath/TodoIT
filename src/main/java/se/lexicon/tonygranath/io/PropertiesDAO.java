@@ -1,4 +1,4 @@
-package se.lexicon.tonygranath.data;
+package se.lexicon.tonygranath.io;
 
 import java.util.Map;
 
