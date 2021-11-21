@@ -67,7 +67,12 @@ public class TodoItemTaskDAOCollection implements TodoItemTaskDAO {
     @Override
     public Collection<TodoItemTask> findByPersonId(int personId) {
         Collection<TodoItemTask> found = new HashSet<>();
-        tasks.stream().filter(task -> task.getAssignee().getId() == personId).forEach(found::add);
+       // tasks.stream().filter(task -> task.getAssignee().getId() == personId).forEach(found::add);
+        for (TodoItemTask t : tasks) {
+            if ((t.getAssignee() != null) && (t.getAssignee().getId() == personId)) {
+                found.add(t);
+            }
+        }
         return found;
     }
 }

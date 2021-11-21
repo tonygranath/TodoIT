@@ -26,9 +26,6 @@ public class TodoItemTaskDAOCollectionTest {
         tasks = TodoItemTaskDAOCollection.getTestInstance();
         tasks.persist(task1);
         tasks.persist(task2);
-      //  tasks.persist(task3);
-      //  JSONManager j = JSONManager.getInstance();
-      //  j.serializeCollection(new File("resources/json/todoitemtasks.json"), tasks.findAll());
     }
 
     @Test
@@ -54,13 +51,20 @@ public class TodoItemTaskDAOCollectionTest {
 
     @Test
     public void findById() {
+        assertEquals(task1, tasks.findById(task1.getId()).get());
+        assertEquals(task2, tasks.findById(task2.getId()).get());
     }
 
     @Test
     public void findByAssignedStatus() {
+        assertEquals(0, tasks.findByAssignedStatus(true).size());
+        assertEquals(2, tasks.findByAssignedStatus(false).size());
     }
 
     @Test
     public void findByPersonId() {
+        task3.setAssignee(people.stream().filter(p -> p.getId() == 1).findFirst().get());
+        tasks.persist(task3);
+        assertEquals(1, tasks.findByPersonId(1).size());
     }
 }
