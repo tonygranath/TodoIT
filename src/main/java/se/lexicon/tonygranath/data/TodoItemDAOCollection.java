@@ -1,7 +1,9 @@
 package se.lexicon.tonygranath.data;
 
+import se.lexicon.tonygranath.io.JSONManager;
 import se.lexicon.tonygranath.model.TodoItem;
 
+import java.io.File;
 import java.time.LocalDate;
 import java.util.Collection;
 import java.util.HashSet;
@@ -11,21 +13,25 @@ public class TodoItemDAOCollection implements TodoItemDAO {
     private static TodoItemDAOCollection INSTANCE;
     private Collection<TodoItem> items = new HashSet<>();
 
-    public TodoItemDAOCollection(Collection<TodoItem> items) {
-        if (items != null)
+    private TodoItemDAOCollection(Collection<TodoItem> items) {
+        if (items == null) {
+            File file = new File("resources/json/todoitems.json");
+            if (file.exists()) {
+                JSONManager jsonManager = JSONManager.getInstance();
+                this.items = jsonManager.deserializeToCollection(file, this.items, TodoItem.class);
+            }
+        } else
             this.items = items;
     }
 
-    private TodoItemDAOCollection() {}
-
     public static TodoItemDAOCollection getInstance() {
         if (INSTANCE == null)
-            INSTANCE = new TodoItemDAOCollection();
+            INSTANCE = new TodoItemDAOCollection(null);
         return INSTANCE;
     }
 
     public static TodoItemDAOCollection getTestInstance() {
-        return new TodoItemDAOCollection();
+        return new TodoItemDAOCollection(new HashSet<>());
     }
 
     @Override

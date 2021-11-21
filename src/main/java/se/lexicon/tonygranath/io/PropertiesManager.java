@@ -12,8 +12,13 @@ public class PropertiesManager {
     private static PropertiesManager INSTANCE;
     private Map<String, String> propertyMap = new HashMap<>();
 
-    public PropertiesManager(Map<String, String> properties) {
-        if (properties != null)
+    private PropertiesManager(Map<String, String> properties) {
+        if (properties == null) {
+            File file = new File("resources/settings.cfg");
+            if (file.exists()) {
+                read(file.getPath());
+            }
+        } else
             propertyMap = properties;
     }
 
@@ -21,12 +26,12 @@ public class PropertiesManager {
 
     public static PropertiesManager getInstance() {
         if (INSTANCE == null)
-            INSTANCE = new PropertiesManager();
+            INSTANCE = new PropertiesManager(null);
         return INSTANCE;
     }
 
     public static PropertiesManager getTestInstance() {
-        return new PropertiesManager();
+        return new PropertiesManager(new HashMap<>());
     }
 
     public Map<String, String> getProperties() {
@@ -53,8 +58,7 @@ public class PropertiesManager {
     }
 
     public void set(String property, String value) {
-        if (propertyMap.putIfAbsent(property, value) != null)
-            throw new RuntimeException("Property "+ property + " already set.");
+        propertyMap.put(property, value);
     }
 
     public void set(Map<String, String> properties) {
@@ -85,5 +89,9 @@ public class PropertiesManager {
 
     public void remove(String property) {
         propertyMap.remove(property);
+    }
+
+    public String get(String key) {
+        return propertyMap.get(key);
     }
 }

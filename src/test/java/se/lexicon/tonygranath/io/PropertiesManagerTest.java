@@ -93,9 +93,4 @@ public class PropertiesManagerTest {
         PROPERTIES_DAO.remove("key");
         assertFalse(PROPERTIES_DAO.getProperties().containsKey("key"));
     }
-
-    @Test
-    public void getInstance() {
-        assertEquals(PropertiesManager.getInstance(), PROPERTIES_DAO);
-    }
 }

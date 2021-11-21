@@ -1,7 +1,9 @@
 package se.lexicon.tonygranath.data;
 
+import se.lexicon.tonygranath.io.JSONManager;
 import se.lexicon.tonygranath.model.Person;
 
+import java.io.File;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Optional;
@@ -10,21 +12,25 @@ public class PersonDAOCollection implements PersonDAO {
     private static PersonDAOCollection INSTANCE;
     private Collection<Person> people = new HashSet<>();
 
-    public PersonDAOCollection(Collection<Person> people) {
-        if (people != null)
+    private PersonDAOCollection(Collection<Person> people) {
+        if (people == null) {
+            File file = new File("resources/json/persons.json");
+            if (file.exists()) {
+                JSONManager jsonManager = JSONManager.getInstance();
+                this.people = jsonManager.deserializeToCollection(file, this.people, Person.class);
+            }
+        } else
             this.people = people;
     }
 
-    private PersonDAOCollection() {}
-
     public static PersonDAOCollection getInstance() {
         if (INSTANCE == null)
-            INSTANCE = new PersonDAOCollection();
+            INSTANCE = new PersonDAOCollection(null);
         return INSTANCE;
     }
 
     public static PersonDAOCollection getTestInstance() {
-        return new PersonDAOCollection();
+        return new PersonDAOCollection(new HashSet<>());
     }
 
     @Override

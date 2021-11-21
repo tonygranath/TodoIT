@@ -1,0 +1,52 @@
+[ {
+  "id" : 1,
+  "title" : "TITLE 1",
+  "taskDescription" : "DESCRIPTION 1",
+  "deadLine" : [ 2022, 1, 1 ],
+  "done" : false,
+  "creator" : {
+    "id" : 1,
+    "firstName" : "Lars",
+    "lastName" : "Ohly",
+    "email" : "lars.ohly@vpk.se",
+    "credentials" : {
+      "username" : "lasse",
+      "password" : "123",
+      "role" : "ROLE_APP_USER"
+    }
+  }
+}, {
+  "id" : 2,
+  "title" : "TITLE 2",
+  "taskDescription" : "DESCRIPTION 2",
+  "deadLine" : [ 2024, 4, 2 ],
+  "done" : false,
+  "creator" : {
+    "id" : 1,
+    "firstName" : "Lars",
+    "lastName" : "Ohly",
+    "email" : "lars.ohly@vpk.se",
+    "credentials" : {
+      "username" : "lasse",
+      "password" : "123",
+      "role" : "ROLE_APP_USER"
+    }
+  }
+}, {
+  "id" : 3,
+  "title" : "TITLE 3",
+  "taskDescription" : "DESCRIPTION 3",
+  "deadLine" : [ 2019, 1, 2 ],
+  "done" : true,
+  "creator" : {
+    "id" : 2,
+    "firstName" : "Lars",
+    "lastName" : "Leijonborg",
+    "email" : "lasse@fp.se",
+    "credentials" : {
+      "username" : "lasse",
+      "password" : "123",
+      "role" : "ROLE_APP_USER"
+    }
+  }
+} ]

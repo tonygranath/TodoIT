@@ -27,9 +27,8 @@ public class TodoItemTaskDAOCollectionTest {
         tasks.persist(task1);
         tasks.persist(task2);
       //  tasks.persist(task3);
-     //   JSONManager j = JSONManager.getInstance();
-     //   j.serializeCollection(new File("resources/json/todoitemtasks.json"), tasks.findAll());
-      //  System.out.println(tasks.findAll());
+      //  JSONManager j = JSONManager.getInstance();
+      //  j.serializeCollection(new File("resources/json/todoitemtasks.json"), tasks.findAll());
     }
 
     @Test

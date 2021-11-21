@@ -1,7 +1,9 @@
 package se.lexicon.tonygranath.data;
 
+import se.lexicon.tonygranath.io.JSONManager;
 import se.lexicon.tonygranath.model.AppUser;
 
+import java.io.File;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Optional;
@@ -10,21 +12,25 @@ public class AppUserDAOCollection implements AppUserDAO {
     private static AppUserDAOCollection INSTANCE;
     private Collection<AppUser> appUsers = new HashSet<>();
 
-    public AppUserDAOCollection(Collection<AppUser> users) {
-        if (users != null)
+    private AppUserDAOCollection(Collection<AppUser> users) {
+        if (users == null) {
+            File file = new File("resources/json/appusers.json");
+            if (file.exists()) {
+                JSONManager jsonManager = JSONManager.getInstance();
+                appUsers = jsonManager.deserializeToCollection(file, appUsers, AppUser.class);
+            }
+        } else
             appUsers = users;
     }
 
-    private AppUserDAOCollection() {}
-
     public static AppUserDAOCollection getInstance() {
         if (INSTANCE == null)
-            INSTANCE = new AppUserDAOCollection();
+            INSTANCE = new AppUserDAOCollection(null);
         return INSTANCE;
     }
 
     public static AppUserDAOCollection getTestInstance() {
-        return new AppUserDAOCollection();
+        return new AppUserDAOCollection(new HashSet<>());
     }
 
     @Override

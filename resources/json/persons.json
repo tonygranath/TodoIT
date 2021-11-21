@@ -1,0 +1,31 @@
+[ {
+  "id" : 1,
+  "firstName" : "Lars",
+  "lastName" : "Ohly",
+  "email" : "lars.ohly@vpk.se",
+  "credentials" : {
+    "username" : "lasse",
+    "password" : "123",
+    "role" : "ROLE_APP_USER"
+  }
+}, {
+  "id" : 3,
+  "firstName" : "Test",
+  "lastName" : "Testsson",
+  "email" : "test@test.se",
+  "credentials" : {
+    "username" : "lasse",
+    "password" : "123",
+    "role" : "ROLE_APP_USER"
+  }
+}, {
+  "id" : 2,
+  "firstName" : "Lars",
+  "lastName" : "Leijonborg",
+  "email" : "lasse@fp.se",
+  "credentials" : {
+    "username" : "lasse",
+    "password" : "123",
+    "role" : "ROLE_APP_USER"
+  }
+} ]

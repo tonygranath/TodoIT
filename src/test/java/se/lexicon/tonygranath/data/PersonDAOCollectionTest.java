@@ -48,6 +48,7 @@ public class PersonDAOCollectionTest {
 
     @Test
     public void findById() {
+        System.out.println(TEST_COLLECTION.findAll());
         assertEquals(TEST_COLLECTION.findById(testPerson1.getId()).get(), testPerson1);
         assertEquals(TEST_COLLECTION.findById(testPerson2.getId()).get(), testPerson2);
     }

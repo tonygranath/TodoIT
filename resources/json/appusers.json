@@ -1,0 +1,17 @@
+[ {
+  "username" : "admin",
+  "password" : "gjesgoiseoig",
+  "role" : "ROLE_APP_ADMIN"
+}, {
+  "username" : "user3",
+  "password" : "rfhs",
+  "role" : "ROLE_APP_USER"
+}, {
+  "username" : "user2",
+  "password" : "fgewgad",
+  "role" : "ROLE_APP_USER"
+}, {
+  "username" : "user1",
+  "password" : "afsff",
+  "role" : "ROLE_APP_USER"
+} ]

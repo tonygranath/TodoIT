@@ -47,9 +47,9 @@ public class TodoItemDAOCollectionTest {
         items = TodoItemDAOCollection.getTestInstance();
         items.persist(item1);
         items.persist(item2);
-        items.persist(item3);
-        JSONManager j = JSONManager.getInstance();
-        j.serializeCollection(new File("resources/json/todoitems.json"), items.findAll());
+       // items.persist(item3);
+       // JSONManager j = JSONManager.getInstance();
+       // j.serializeCollection(new File("resources/json/todoitems.json"), items.findAll());
 
     }
 

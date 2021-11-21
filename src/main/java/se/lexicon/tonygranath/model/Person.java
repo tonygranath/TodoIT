@@ -15,6 +15,7 @@ public class Person {
 		setFirstName(firstName);
 		setLastName(lastName);
 		setEmail(email);
+		this.id = id;
 	}
 
 	public Person(int id, String firstName, String lastName, String email, AppUser credentials) {
